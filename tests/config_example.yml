@@ -1,0 +1,14 @@
+computers:
+  localhost:
+    hostname: localhost
+    description: localhost
+    transport: local
+    scheduler: direct
+    work_directory: /tmp/test_aiida_wait_run
+
+codes:
+  wait:
+    description: wait script
+    default_plugin: wait.wait
+    remote_computer: localhost
+    remote_abspath: /home/greschd/software/wait_for.sh
