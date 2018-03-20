@@ -7,7 +7,7 @@ from aiida.common.datastructures import CalcInfo, CodeInfo
 
 class WaitCalculation(JobCalculation):
     def _init_internal_params(self):
-        super(DifferenceCalculation, self)._init_internal_params()
+        super(WaitCalculation, self)._init_internal_params()
 
         self._OUTPUT_FILE_NAME = 'diff.txt'
         self._default_parser = 'wait.wait'
@@ -21,6 +21,7 @@ class WaitCalculation(JobCalculation):
         codeinfo = CodeInfo()
         codeinfo.cmdline_params = []
         codeinfo.stdout_name = self._OUTPUT_FILE_NAME
+        code = inputdict.pop(self.get_linkname('code'))
         codeinfo.code_uuid = code.uuid
         calcinfo.codes_info = [codeinfo]
 
