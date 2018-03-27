@@ -6,19 +6,20 @@ from __future__ import division, print_function, unicode_literals
 
 from aiida.orm.code import Code
 from aiida.orm import CalculationFactory
-from aiida.work.run import run
+from aiida.work.launch import submit
 
 
 def main():
     DifferenceCalculation = CalculationFactory('wait.wait')
-    process = DifferenceCalculation.process()
-    inputs = process.get_inputs_template()
-    inputs.code = Code.get_from_string('wait')
-    inputs._options.resources = {'num_machines': 1}
-    inputs._options.withmpi = False
+    builder = DifferenceCalculation.get_builder()
+    builder.code = Code.get_from_string('wait')
+    builder.options = {
+        'resources': {'num_machines': 1},
+        'withmpi': False
+    }
 
-    output = run(process, **inputs)
-    print('Difference:', output['output_parameters'].dict['diff'])
+    node = submit(builder)
+    print(node.pk)
 
 if __name__ == '__main__':
     main()
