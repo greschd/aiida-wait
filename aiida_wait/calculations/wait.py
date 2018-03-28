@@ -9,7 +9,7 @@ class WaitCalculation(JobCalculation):
     def _init_internal_params(self):
         super(WaitCalculation, self)._init_internal_params()
 
-        self._OUTPUT_FILE_NAME = 'diff.txt'
+        self._OUTPUT_FILE_NAME = 'log'
         self._default_parser = 'wait.wait'
 
     def _prepare_for_submission(self, tempfolder, inputdict):
